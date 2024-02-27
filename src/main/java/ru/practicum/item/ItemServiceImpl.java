@@ -7,24 +7,25 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepository itemRepository;
+    private final ItemRepository repository;
 
-    public ItemServiceImpl(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
+    public ItemServiceImpl(ItemRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public List<Item> getItems(long userId) {
-        return itemRepository.findByUserId(userId);
+        return repository.findByUserId(userId);
     }
 
     @Override
-    public Item addNewItem(Long userId, Item item) {
-        return itemRepository.save(item);
+    public Item addNewItem(long userId, Item item) {
+        item.setUserId(userId);
+        return repository.save(item);
     }
 
     @Override
     public void deleteItem(long userId, long itemId) {
-        itemRepository.deleteByUserIdAndItemId(userId, itemId);
+        repository.deleteByUserIdAndItemId(userId, itemId);
     }
 }
