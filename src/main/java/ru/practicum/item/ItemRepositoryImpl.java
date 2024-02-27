@@ -1,10 +1,13 @@
 package ru.practicum.item;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
+@Repository
 public class ItemRepositoryImpl implements ItemRepository {
 
     private final Map<Long, List<Item>> items = new HashMap<>();
