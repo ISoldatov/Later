@@ -9,6 +9,7 @@ import java.util.List;
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemController {
+
     private final ItemServiceImpl itemServiceImpl;
 
     @GetMapping
@@ -24,7 +25,8 @@ public class ItemController {
 
     @DeleteMapping("/{itemId}")
     public void deleteItem(@RequestHeader("X-Later-User-Id") long userId,
-                           @PathVariable long itemId) {
+                           @PathVariable("itemId") long itemId) {
         itemServiceImpl.deleteItem(userId, itemId);
     }
 }
+
