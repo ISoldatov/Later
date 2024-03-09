@@ -1,10 +1,13 @@
 package ru.practicum.user;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Table(name = "users", schema = "public")
+@Data
 public class User {
 
     @Id

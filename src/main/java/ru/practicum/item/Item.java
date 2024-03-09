@@ -5,23 +5,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.HashSet;
+import java.util.Set;
+
+
 @Entity
 @Table(name = "items", schema = "public")
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
-    @OneToMany
-    @CollectionTable(name="users", joinColumns=@JoinColumn(name="user_id"))
+//    @CollectionTable(name="users", joinColumns=@JoinColumn(name="user_id"))
     @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "url")
     private String url;
+
+    @ElementCollection
+    @CollectionTable(name="tags", joinColumns = @JoinColumn(name = "item_id"))
+    @Column(name = "name")
+    private Set<String> tags = new HashSet<>();
 }
